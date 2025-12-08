@@ -51,3 +51,8 @@ export const Fonts = Platform.select({
     mono: "SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
   },
 });
+
+export const CustomFonts = {
+  default: 'SaansMedium',
+  claim: 'BagossCondensed-Bold',
+};
