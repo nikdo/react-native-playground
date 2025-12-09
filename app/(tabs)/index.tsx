@@ -1,6 +1,6 @@
 import { ScrollView, StyleSheet, View } from 'react-native';
 
-import V3 from '@/assets/images/v3.svg';
+import V3 from '@/assets/images/cityscape-dark.svg';
 import Claim from '@/components/claim';
 import PrimaryButton from '@/components/primary-button';
 
@@ -9,9 +9,9 @@ export default function HomeScreen() {
     <ScrollView 
       style={styles.container}
       contentContainerStyle={styles.contentContainer}>
-      <Claim text="Time to plan your next workday?" />
+      <Claim text="Time to plan your next workday?!?" />
       <View style={styles.svgContainer}>
-        <V3 style={styles.svgImage} />
+        <V3 style={styles.svgImage} color="#0f0" />
       </View>
       <PrimaryButton text="Explore locations" />
     </ScrollView>
@@ -33,6 +33,6 @@ const styles = StyleSheet.create({
   },
   svgImage: {
     width: '100%',
-    aspectRatio: 440 / 200,
+    aspectRatio: 195 / 130,
   },
 });

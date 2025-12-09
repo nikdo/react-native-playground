@@ -38,3 +38,4 @@ const styles = StyleSheet.create({
     fontFamily: CustomFonts.default,
   },
 });
+
