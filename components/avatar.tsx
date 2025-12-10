@@ -1,4 +1,4 @@
-import { Image, StyleSheet, View } from 'react-native';
+import { Image, Pressable, StyleSheet, View } from 'react-native';
 
 import ManInBlack from '@/assets/images/man-in-black.svg';
 import DefaultText from '@/components/default-text';
@@ -10,6 +10,7 @@ type AvatarProps = {
   imageSource?: string | number;
   initials?: string;
   size?: number;
+  onPress?: () => void;
 };
 
 export default function Avatar({
@@ -17,47 +18,56 @@ export default function Avatar({
   imageSource,
   initials = '',
   size = 64,
+  onPress,
 }: AvatarProps) {
   const borderRadius = size / 2;
 
-  if (type === 'photo' && imageSource) {
-    return (
-      <View style={[styles.container, { width: size, height: size, borderRadius }]}>
-        <Image
-          source={typeof imageSource === 'string' ? { uri: imageSource } : imageSource}
-          style={[styles.photo, { borderRadius }]}
-        />
-      </View>
-    );
-  }
+  const content = (() => {
+    if (type === 'photo' && imageSource) {
+      return (
+        <View style={[styles.container, { width: size, height: size, borderRadius }]}>
+          <Image
+            source={typeof imageSource === 'string' ? { uri: imageSource } : imageSource}
+            style={[styles.photo, { borderRadius }]}
+          />
+        </View>
+      );
+    }
 
-  if (type === 'initials') {
-    const fontSize = size * 0.375; // Scale font size with avatar size
+    if (type === 'initials') {
+      const fontSize = size * 0.375;
+      return (
+        <View
+          style={[
+            styles.container,
+            styles.initialsContainer,
+            { width: size, height: size, borderRadius },
+          ]}>
+          <DefaultText style={[styles.initialsText, { fontSize, lineHeight: fontSize * 1.08 }]}>
+            {initials}
+          </DefaultText>
+        </View>
+      );
+    }
+
+    // Incognito type
     return (
       <View
         style={[
           styles.container,
-          styles.initialsContainer,
+          styles.incognitoContainer,
           { width: size, height: size, borderRadius },
         ]}>
-        <DefaultText style={[styles.initialsText, { fontSize, lineHeight: fontSize * 1.08 }]}>
-          {initials}
-        </DefaultText>
+        <ManInBlack width={size} height={size} color="#a069aa" />
       </View>
     );
+  })();
+
+  if (onPress) {
+    return <Pressable onPress={onPress}>{content}</Pressable>;
   }
 
-  // Incognito type
-  return (
-    <View
-      style={[
-        styles.container,
-        styles.incognitoContainer,
-        { width: size, height: size, borderRadius },
-      ]}>
-      <ManInBlack width={size} height={size} color="#a069aa" />
-    </View>
-  );
+  return content;
 }
 
 const styles = StyleSheet.create({

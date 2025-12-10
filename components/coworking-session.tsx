@@ -14,12 +14,14 @@ type CoworkingSessionProps = {
   enabled: boolean;
   onToggle: (value: boolean) => void;
   members?: CoworkingMember[];
+  onAvatarPress?: (member: CoworkingMember) => void;
 };
 
 export default function CoworkingSession({
   enabled,
   onToggle,
   members = [],
+  onAvatarPress,
 }: CoworkingSessionProps) {
   const memberCount = members.length;
 
@@ -57,6 +59,7 @@ export default function CoworkingSession({
                 imageSource={member.imageSource}
                 initials={member.initials}
                 size={64}
+                onPress={onAvatarPress ? () => onAvatarPress(member) : undefined}
               />
             ))}
           </View>

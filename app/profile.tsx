@@ -1,8 +1,11 @@
+import { router } from 'expo-router';
 import { useState } from 'react';
-import { ScrollView, StyleSheet, Switch, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, Switch, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import MagnifiedUser from '@/assets/images/magnified-user.svg';
 import DefaultText from '@/components/default-text';
+import { IconSymbol } from '@/components/ui/icon-symbol';
 
 const SHORT_TEXT = "We don't know much about them yet.";
 const LONG_TEXT =
@@ -11,13 +14,18 @@ const LONG_TEXT =
   "So David here? Yeah, we don't know much about him. Maybe he's a secret genius. Maybe he puts pineapple on pizza. Maybe he's the kind of person who claps when the plane lands. Who knows? And more importantly, who cares? " +
   "The beautiful thing about not knowing someone is the potential. Right now, David could be anything. He could be your future best friend, your arch-nemesis, or just another face you'll forget by next Tuesday. And that uncertainty? That's not a bug, it's a feature of life.";
 
-export default function IllustrationScreen() {
+export default function ProfileScreen() {
   const [isExpanded, setIsExpanded] = useState(false);
+  const insets = useSafeAreaInsets();
 
   return (
     <View style={styles.screen}>
-      {/* Fixed header with toggle */}
-      <View style={styles.header}>
+      {/* Header with close button */}
+      <View style={[styles.header, { paddingTop: insets.top + 16 }]}>
+        <Pressable style={styles.closeButton} onPress={() => router.back()}>
+          <IconSymbol name="xmark" size={20} color="#0f0f0f" />
+        </Pressable>
+        <View style={styles.headerSpacer} />
         <DefaultText style={styles.headerLabel}>Show long text</DefaultText>
         <Switch
           value={isExpanded}
@@ -30,37 +38,36 @@ export default function IllustrationScreen() {
       <ScrollView
         style={styles.container}
         contentContainerStyle={styles.contentContainer}
-        alwaysBounceVertical={false} // iOS: only bounce when content overflows
-      >
-      {/* Content */}
-      <View style={styles.content}>
-        {/* Avatar */}
-        <View style={styles.avatar}>
-          <DefaultText style={styles.avatarText}>DG</DefaultText>
+        alwaysBounceVertical={false}>
+        {/* Content */}
+        <View style={styles.content}>
+          {/* Avatar */}
+          <View style={styles.avatar}>
+            <DefaultText style={styles.avatarText}>DG</DefaultText>
+          </View>
+
+          {/* Name */}
+          <View style={styles.nameContainer}>
+            <DefaultText style={styles.name}>David Gregor</DefaultText>
+          </View>
+
+          {/* Subtitle */}
+          <DefaultText style={styles.subtitle}>
+            {isExpanded ? LONG_TEXT : SHORT_TEXT}
+          </DefaultText>
         </View>
 
-        {/* Name */}
-        <View style={styles.nameContainer}>
-          <DefaultText style={styles.name}>David Gregor</DefaultText>
+        {/* Illustration - container has fixed height, SVG overflows visually */}
+        <View style={styles.illustrationContainer}>
+          <MagnifiedUser
+            width={350}
+            height={650}
+            color="#a069aa"
+            style={styles.illustration}
+          />
         </View>
-
-        {/* Subtitle */}
-        <DefaultText style={styles.subtitle}>
-          {isExpanded ? LONG_TEXT : SHORT_TEXT}
-        </DefaultText>
-      </View>
-
-      {/* Illustration - container has fixed height, SVG overflows visually */}
-      <View style={styles.illustrationContainer}>
-        <MagnifiedUser
-          width={350}
-          height={650}
-          color="#a069aa"
-          style={styles.illustration}
-        />
-      </View>
-    </ScrollView>
-  </View>
+      </ScrollView>
+    </View>
   );
 }
 
@@ -72,16 +79,27 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
     paddingHorizontal: 20,
-    paddingTop: 60,
+    paddingTop: 16,
     paddingBottom: 12,
     backgroundColor: '#fad2ff',
+  },
+  closeButton: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: 'rgba(0, 0, 0, 0.1)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  headerSpacer: {
+    flex: 1,
   },
   headerLabel: {
     fontSize: 16,
     fontWeight: '600',
     color: '#0f0f0f',
+    marginRight: 12,
   },
   container: {
     flex: 1,
@@ -136,12 +154,12 @@ const styles = StyleSheet.create({
   illustrationContainer: {
     marginTop: 24,
     width: 350,
-    height: 200, // Fixed height - only this contributes to scroll area
+    height: 200,
     alignSelf: 'center',
-    overflow: 'visible', // Allow SVG to render beyond container bounds
+    overflow: 'visible',
   },
   illustration: {
-    position: 'absolute', // Removes from layout flow, won't affect container size
+    position: 'absolute',
     top: 0,
     left: 0,
   },

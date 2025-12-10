@@ -1,3 +1,4 @@
+import { router } from 'expo-router';
 import { useState } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 
@@ -43,6 +44,10 @@ const SAMPLE_MEMBERS: CoworkingMember[] = [
 export default function CoworkingScreen() {
   const [isEnabled, setIsEnabled] = useState(true);
 
+  const handleAvatarPress = () => {
+    router.push('/profile');
+  };
+
   return (
     <View style={styles.screen}>
       <ScrollView
@@ -53,6 +58,7 @@ export default function CoworkingScreen() {
           enabled={isEnabled}
           onToggle={setIsEnabled}
           members={SAMPLE_MEMBERS}
+          onAvatarPress={handleAvatarPress}
         />
       </ScrollView>
     </View>
