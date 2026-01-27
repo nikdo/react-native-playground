@@ -18,6 +18,7 @@ export default function RootLayout() {
   const colorScheme = useColorScheme();
   const [loaded, error] = useFonts({
     SaansMedium: require('../assets/fonts/SaansMedium.ttf'),
+    SaansBold: require('../assets/fonts/SaansBold.ttf'),
     'BagossCondensed-Bold': require('../assets/fonts/BagossCondensed-Bold.ttf'),
   });
 

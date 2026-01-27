@@ -54,5 +54,6 @@ export const Fonts = Platform.select({
 
 export const CustomFonts = {
   default: 'SaansMedium',
+  bold: 'SaansBold',
   claim: 'BagossCondensed-Bold',
 };
