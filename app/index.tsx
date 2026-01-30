@@ -1,0 +1,82 @@
+import { router } from 'expo-router';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+import ExperimentCard from '@/components/experiment-card';
+import { CustomFonts } from '@/constants/theme';
+
+const EXPERIMENTS = [
+  {
+    id: 'buttons',
+    name: 'Buttons',
+    description: 'Custom button variants and states.',
+    icon: 'rectangle.fill' as const,
+    route: '/buttons' as const,
+  },
+  {
+    id: 'coworking',
+    name: 'Coworking',
+    description: 'Session card with avatars.',
+    icon: 'person.2.fill' as const,
+    route: '/coworking' as const,
+  },
+];
+
+export default function HomeScreen() {
+  const insets = useSafeAreaInsets();
+
+  return (
+    <ScrollView
+      style={styles.container}
+      contentContainerStyle={[
+        styles.contentContainer,
+        { paddingTop: insets.top + 20 },
+      ]}
+    >
+      <View style={styles.header}>
+        <Text style={styles.title}>Experiments</Text>
+        <Text style={styles.subtitle}>React Native playground</Text>
+      </View>
+
+      <View style={styles.cardList}>
+        {EXPERIMENTS.map((experiment) => (
+          <ExperimentCard
+            key={experiment.id}
+            name={experiment.name}
+            description={experiment.description}
+            icon={experiment.icon}
+            onPress={() => router.push(experiment.route)}
+          />
+        ))}
+      </View>
+    </ScrollView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fafafa',
+  },
+  contentContainer: {
+    paddingHorizontal: 20,
+    paddingBottom: 40,
+  },
+  header: {
+    marginBottom: 32,
+  },
+  title: {
+    fontSize: 34,
+    fontFamily: CustomFonts.bold,
+    color: '#000',
+    marginBottom: 4,
+  },
+  subtitle: {
+    fontSize: 16,
+    fontFamily: CustomFonts.default,
+    color: '#666',
+  },
+  cardList: {
+    flex: 1,
+  },
+});
