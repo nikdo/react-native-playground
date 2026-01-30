@@ -20,6 +20,13 @@ const EXPERIMENTS = [
     icon: 'person.2.fill' as const,
     route: '/coworking' as const,
   },
+  {
+    id: 'negative-margin',
+    name: 'Negative Margin',
+    description: 'Breaking out of parent padding.',
+    icon: 'arrow.left.and.right' as const,
+    route: '/negative-margin' as const,
+  },
 ];
 
 export default function HomeScreen() {

@@ -42,6 +42,7 @@ export default function RootLayout() {
             headerShown: false,
           }}
         />
+        <Stack.Screen name="negative-margin" options={{ title: 'Negative Margin' }} />
       </Stack>
       <StatusBar style="auto" />
     </ThemeProvider>
