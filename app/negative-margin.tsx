@@ -3,13 +3,10 @@ import { ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-n
 import FlyingUp from '@/assets/images/flying-up.svg';
 import { CustomFonts } from '@/constants/theme';
 
-const SVG_ASPECT_RATIO = 390 / 320; // width / height from the SVG viewBox
-
 const SCREEN_PADDING = 20;
 
 export default function NegativeMarginScreen() {
   const { width: screenWidth } = useWindowDimensions();
-  const svgHeight = screenWidth / SVG_ASPECT_RATIO;
 
   return (
     <ScrollView
@@ -39,7 +36,7 @@ export default function NegativeMarginScreen() {
 
         {/* Full-width SVG using negative margin */}
         <View style={styles.svgContainer}>
-          <FlyingUp width={screenWidth} height={svgHeight} />
+          <FlyingUp width={screenWidth} />
         </View>
 
         {/* Regular box respecting padding */}
