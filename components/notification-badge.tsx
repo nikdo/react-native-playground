@@ -1,6 +1,6 @@
 import { StyleSheet, Text, TextStyle, View, ViewStyle } from 'react-native';
 
-import { CustomFonts } from '@/constants/theme';
+import { BASE_UNIT, CustomFonts } from '@/constants/theme';
 
 type BadgeSize = 'regular' | 'compact';
 
@@ -30,9 +30,9 @@ export default function NotificationBadge({
 
 const styles = StyleSheet.create({
   container: {
-    width: 24,
-    height: 24,
-    borderRadius: 12,
+    width: BASE_UNIT * 3,
+    height: BASE_UNIT * 3,
+    borderRadius: (BASE_UNIT * 3) / 2,
     backgroundColor: '#e34f6a',
     alignItems: 'center',
     justifyContent: 'center',
@@ -44,11 +44,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   regularText: {
-    fontSize: 16,
-    lineHeight: 24,
+    fontSize: BASE_UNIT * 2,
+    lineHeight: BASE_UNIT * 3,
   },
   compactText: {
-    fontSize: 14,
-    lineHeight: 20,
+    fontSize: BASE_UNIT * 1.75,
+    lineHeight: BASE_UNIT * 2.5,
   },
 });

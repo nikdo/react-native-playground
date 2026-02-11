@@ -52,6 +52,8 @@ export const Fonts = Platform.select({
   },
 });
 
+export const BASE_UNIT = 8;
+
 export const CustomFonts = {
   default: 'SaansMedium',
   bold: 'SaansBold',
