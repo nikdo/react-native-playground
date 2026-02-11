@@ -43,6 +43,7 @@ export default function RootLayout() {
           }}
         />
         <Stack.Screen name="negative-margin" options={{ title: 'Negative Margin' }} />
+        <Stack.Screen name="badges" options={{ title: 'Badges' }} />
       </Stack>
       <StatusBar style="auto" />
     </ThemeProvider>

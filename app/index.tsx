@@ -27,6 +27,13 @@ const EXPERIMENTS = [
     icon: 'arrow.left.and.right' as const,
     route: '/negative-margin' as const,
   },
+  {
+    id: 'badges',
+    name: 'Badges',
+    description: 'Notification badge in two sizes.',
+    icon: 'app.badge.fill' as const,
+    route: '/badges' as const,
+  },
 ];
 
 export default function HomeScreen() {
