@@ -1,136 +1,154 @@
-import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { useState } from 'react';
+import { View, Image, Switch, Text, StyleSheet } from 'react-native';
 
 import Button from '@/components/button';
-import { CustomFonts } from '@/constants/theme';
+import MaterialIcon from '@/components/material-icon';
+import { BrandColors, CustomFonts } from '@/constants/theme';
+
+const ICONS = {
+  check_circle: '\uf0be',
+  cancel: '\ue888',
+  share: '\ue80d',
+  bookmark: '\ue8e7',
+};
 
 export default function ButtonsScreen() {
-  const handlePress = (variant: string) => {
-    Alert.alert('Button Pressed', `You pressed the ${variant} button`);
-  };
+  const [showOverlay, setShowOverlay] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
 
   return (
-    <ScrollView
-      style={styles.container}
-      contentContainerStyle={styles.contentContainer}
-    >
-      <Text style={styles.title}>Button Showcase</Text>
-      <Text style={styles.subtitle}>Based on Figma Design</Text>
-
-      {/* Primary Regular */}
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Primary / Regular</Text>
-        <Button
-          caption="Submit"
-          type="primary"
-          size="regular"
-          onPress={() => handlePress('Primary Regular')}
-        />
-      </View>
-
-      {/* Subtle Regular */}
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Subtle / Regular</Text>
-        <Button
-          caption="Submit"
-          type="subtle"
-          size="regular"
-          onPress={() => handlePress('Subtle Regular')}
-        />
-      </View>
-
-      {/* Primary Compact */}
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Primary / Compact</Text>
-        <Button
-          caption="Submit"
-          type="primary"
-          size="compact"
-          onPress={() => handlePress('Primary Compact')}
-        />
-      </View>
-
-      {/* Subtle Compact */}
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Subtle / Compact</Text>
-        <Button
-          caption="Submit"
-          type="subtle"
-          size="compact"
-          onPress={() => handlePress('Subtle Compact')}
-        />
-      </View>
-
-      {/* All variants side by side */}
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>All Variants</Text>
-        <View style={styles.variantsGrid}>
-          <Button caption="Primary" type="primary" size="regular" />
-          <Button caption="Subtle" type="subtle" size="regular" />
-          <View style={styles.compactRow}>
-            <Button caption="Primary" type="primary" size="compact" />
-            <Button caption="Subtle" type="subtle" size="compact" />
+    <View style={styles.container}>
+      <View style={styles.content}>
+        {/* Row 1: Primary Regular */}
+        <View style={styles.row}>
+          <View style={styles.leftCol}>
+            <Button caption="Submit" type="primary" size="regular" disabled={isDisabled} />
           </View>
+          <Button
+            caption="Confirm"
+            type="primary"
+            size="regular"
+            disabled={isDisabled}
+            icon={<MaterialIcon name={ICONS.check_circle} size={24} color={BrandColors.white} />}
+          />
+        </View>
+
+        {/* Row 2: Subtle Regular */}
+        <View style={styles.row}>
+          <View style={styles.leftCol}>
+            <Button caption="Reset all" type="subtle" size="regular" disabled={isDisabled} />
+          </View>
+          <Button
+            caption="Reject"
+            type="subtle"
+            size="regular"
+            disabled={isDisabled}
+            icon={<MaterialIcon name={ICONS.cancel} size={24} color={BrandColors.black} />}
+          />
+        </View>
+
+        {/* Row 3: Primary Compact */}
+        <View style={styles.row}>
+          <View style={styles.leftCol}>
+            <Button caption="Invite friends" type="primary" size="compact" disabled={isDisabled} />
+          </View>
+          <Button
+            caption="Share"
+            type="primary"
+            size="compact"
+            disabled={isDisabled}
+            icon={<MaterialIcon name={ICONS.share} size={20} color={BrandColors.white} />}
+          />
+        </View>
+
+        {/* Row 4: Subtle Compact */}
+        <View style={styles.row}>
+          <View style={styles.leftCol}>
+            <Button caption="Show more" type="subtle" size="compact" disabled={isDisabled} />
+          </View>
+          <Button
+            caption="Save"
+            type="subtle"
+            size="compact"
+            disabled={isDisabled}
+            icon={<MaterialIcon name={ICONS.bookmark} size={20} color={BrandColors.black} />}
+          />
         </View>
       </View>
 
-      {/* Disabled states */}
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Disabled States</Text>
-        <View style={styles.disabledRow}>
-          <Button caption="Disabled" type="primary" size="compact" disabled />
-          <Button caption="Disabled" type="subtle" size="compact" disabled />
+      {showOverlay && (
+        <Image
+          source={require('../assets/images/buttons-benchmark.png')}
+          style={styles.overlay}
+          resizeMode="contain"
+        />
+      )}
+
+      <View style={styles.controls}>
+        <View style={styles.toggleRow}>
+          <Text style={styles.toggleLabel}>Disabled</Text>
+          <Switch
+            value={isDisabled}
+            onValueChange={setIsDisabled}
+            trackColor={{ false: '#d4d4d4', true: BrandColors.black }}
+            thumbColor={BrandColors.white}
+          />
+        </View>
+        <View style={styles.toggleRow}>
+          <Text style={styles.toggleLabel}>Overlay from Figma</Text>
+          <Switch
+            value={showOverlay}
+            onValueChange={setShowOverlay}
+            trackColor={{ false: '#d4d4d4', true: BrandColors.black }}
+            thumbColor={BrandColors.white}
+          />
         </View>
       </View>
-    </ScrollView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5F5F5',
+    backgroundColor: BrandColors.white,
   },
-  contentContainer: {
-    padding: 20,
-    paddingTop: 60,
-    paddingBottom: 40,
+  content: {
+    paddingLeft: 24,
+    paddingTop: 48,
+    gap: 24,
   },
-  title: {
-    fontSize: 32,
-    fontFamily: CustomFonts.bold,
-    fontWeight: 'bold',
-    color: '#000000',
-    marginBottom: 4,
-  },
-  subtitle: {
-    fontSize: 16,
-    fontFamily: CustomFonts.default,
-    color: '#666666',
-    marginBottom: 32,
-  },
-  section: {
-    marginBottom: 32,
+  row: {
+    flexDirection: 'row',
     alignItems: 'flex-start',
   },
-  sectionTitle: {
-    fontSize: 14,
-    fontFamily: CustomFonts.default,
-    color: '#888888',
-    marginBottom: 12,
-    textTransform: 'uppercase',
-    letterSpacing: 1,
+  leftCol: {
+    width: 182,
+    alignItems: 'flex-start',
   },
-  variantsGrid: {
+  overlay: {
+    position: 'absolute',
+    left: 24,
+    top: 48,
+    width: 342,
+    height: 232,
+    opacity: 0.8,
+  },
+  controls: {
+    position: 'absolute',
+    bottom: 48,
+    left: 24,
+    right: 24,
     gap: 16,
-    alignItems: 'flex-start',
   },
-  compactRow: {
+  toggleRow: {
     flexDirection: 'row',
-    gap: 12,
-    marginTop: 8,
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
-  disabledRow: {
-    flexDirection: 'row',
-    gap: 12,
+  toggleLabel: {
+    fontFamily: CustomFonts.default,
+    fontSize: 16,
+    color: BrandColors.black,
   },
 });

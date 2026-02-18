@@ -1,6 +1,7 @@
-import { Pressable, StyleSheet, Text, ViewStyle, TextStyle } from 'react-native';
+import { Pressable, StyleSheet, Text, View, ViewStyle, TextStyle } from 'react-native';
+import { ReactNode } from 'react';
 
-import { CustomFonts } from '@/constants/theme';
+import { BrandColors, CustomFonts } from '@/constants/theme';
 
 // Base unit for 8pt grid system
 const base = 8;
@@ -12,14 +13,20 @@ type ButtonProps = {
   caption?: string;
   type?: ButtonType;
   size?: ButtonSize;
+  icon?: ReactNode;
   onPress?: () => void;
   disabled?: boolean;
 };
+
+// White overlay at 44% on black (#000) ≈ #707070 (close to target #6E7878).
+// On white bg it's invisible; on black text/icons it lightens them to gray.
+const DISABLED_OVERLAY_OPACITY = 0.44;
 
 export default function Button({
   caption = 'Submit',
   type = 'primary',
   size = 'regular',
+  icon,
   onPress,
   disabled = false,
 }: ButtonProps) {
@@ -30,8 +37,8 @@ export default function Button({
     styles.buttonBase,
     isPrimary ? styles.primaryBackground : styles.subtleBackground,
     isRegular ? styles.regularPadding : styles.compactPadding,
-    ...(disabled ? [styles.disabled] : []),
-  ];
+    disabled && styles.disabledBorder,
+  ].filter(Boolean) as ViewStyle[];
 
   const textStyle: TextStyle[] = [
     styles.textBase,
@@ -43,12 +50,26 @@ export default function Button({
     <Pressable
       style={({ pressed }) => [
         ...buttonStyle,
-        pressed && styles.pressed,
+        pressed && !disabled && { overflow: 'hidden' as const },
       ]}
       onPress={onPress}
       disabled={disabled}
     >
-      <Text style={textStyle}>{caption}</Text>
+      {({ pressed }) => (
+        <>
+          {pressed && !disabled && (
+            <View
+              style={[
+                StyleSheet.absoluteFill,
+                isPrimary ? styles.pressedOverlayPrimary : styles.pressedOverlaySubtle,
+              ]}
+            />
+          )}
+          {icon}
+          <Text style={textStyle}>{caption}</Text>
+          {disabled && <View style={[StyleSheet.absoluteFill, styles.disabledOverlay]} />}
+        </>
+      )}
     </Pressable>
   );
 }
@@ -56,17 +77,18 @@ export default function Button({
 const styles = StyleSheet.create({
   buttonBase: {
     borderWidth: 2,
-    borderColor: '#000000',
+    borderColor: BrandColors.black,
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
     gap: base,
+    overflow: 'hidden',
   },
   primaryBackground: {
-    backgroundColor: '#000000',
+    backgroundColor: BrandColors.black,
   },
   subtleBackground: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: BrandColors.white,
   },
   regularPadding: {
     paddingVertical: 1.5 * base - 2, // -2 compensating for border
@@ -86,10 +108,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   primaryText: {
-    color: '#FFFFFF',
+    color: BrandColors.white,
   },
   subtleText: {
-    color: '#000000',
+    color: BrandColors.black,
   },
   regularText: {
     fontSize: 2 * base,
@@ -99,10 +121,16 @@ const styles = StyleSheet.create({
     fontSize: 14, // design exception
     lineHeight: 20, // design exception
   },
-  pressed: {
-    opacity: 0.8,
+  pressedOverlayPrimary: {
+    backgroundColor: 'rgba(255, 255, 255, 0.25)',
   },
-  disabled: {
-    opacity: 0.5,
+  pressedOverlaySubtle: {
+    backgroundColor: 'rgba(0, 0, 0, 0.08)',
+  },
+  disabledBorder: {
+    borderColor: '#6E7878',
+  },
+  disabledOverlay: {
+    backgroundColor: `rgba(255, 255, 255, ${DISABLED_OVERLAY_OPACITY})`,
   },
 });

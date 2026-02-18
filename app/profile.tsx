@@ -6,6 +6,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import MagnifiedUser from '@/assets/images/magnified-user.svg';
 import DefaultText from '@/components/default-text';
 import { IconSymbol } from '@/components/ui/icon-symbol';
+import { BrandColors } from '@/constants/theme';
 
 const SHORT_TEXT = "We don't know much about them yet.";
 const LONG_TEXT =
@@ -30,8 +31,8 @@ export default function ProfileScreen() {
         <Switch
           value={isExpanded}
           onValueChange={setIsExpanded}
-          trackColor={{ false: '#d4a5db', true: '#a069aa' }}
-          thumbColor="#ffffff"
+          trackColor={{ false: '#d4a5db', true: BrandColors.darkPink }}
+          thumbColor={BrandColors.white}
         />
       </View>
 
@@ -62,7 +63,7 @@ export default function ProfileScreen() {
           <MagnifiedUser
             width={350}
             height={650}
-            color="#a069aa"
+            color={BrandColors.darkPink}
             style={styles.illustration}
           />
         </View>
@@ -74,7 +75,7 @@ export default function ProfileScreen() {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: '#fad2ff',
+    backgroundColor: BrandColors.pink,
   },
   header: {
     flexDirection: 'row',
@@ -82,7 +83,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingTop: 16,
     paddingBottom: 12,
-    backgroundColor: '#fad2ff',
+    backgroundColor: BrandColors.pink,
   },
   closeButton: {
     width: 32,
@@ -117,9 +118,9 @@ const styles = StyleSheet.create({
     width: 120,
     height: 120,
     borderRadius: 112,
-    backgroundColor: '#a069aa',
+    backgroundColor: BrandColors.darkPink,
     borderWidth: 2,
-    borderColor: '#a069aa',
+    borderColor: BrandColors.darkPink,
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 16,
@@ -129,7 +130,7 @@ const styles = StyleSheet.create({
     fontSize: 48,
     fontWeight: '700',
     lineHeight: 52,
-    color: '#ffffff',
+    color: BrandColors.white,
     textAlign: 'center',
   },
   nameContainer: {
@@ -147,7 +148,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '700',
     lineHeight: 24,
-    color: '#a069aa',
+    color: BrandColors.darkPink,
     textAlign: 'center',
     width: 302,
   },

@@ -52,6 +52,22 @@ export const Fonts = Platform.select({
   },
 });
 
+export const BrandColors = {
+  black: '#000000',
+  white: '#FFFFFF',
+  almostWhite: '#FAFAFA',
+  darkSky: '#379BB4',
+  sky: '#AAE6F0',
+  darkPink: '#A069AA',
+  pink: '#FAD2FF',
+  darkPurple: '#555F8C',
+  purple: '#8C96D7',
+  darkGreen: '#378255',
+  green: '#73F096',
+  darkPeach: '#B46964',
+  peach: '#FAA08C',
+} as const;
+
 export const BASE_UNIT = 8;
 
 export const CustomFonts = {

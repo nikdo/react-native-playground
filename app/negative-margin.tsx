@@ -1,7 +1,7 @@
 import { ScrollView, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 
 import FlyingUp from '@/assets/images/flying-up.svg';
-import { CustomFonts } from '@/constants/theme';
+import { BrandColors, CustomFonts } from '@/constants/theme';
 
 const SCREEN_PADDING = 20;
 
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     fontSize: 32,
     fontFamily: CustomFonts.bold,
     fontWeight: 'bold',
-    color: '#000000',
+    color: BrandColors.black,
     marginBottom: 4,
   },
   subtitle: {
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
   fullWidthBoxLabel: {
     fontSize: 14,
     fontFamily: CustomFonts.default,
-    color: '#FFFFFF',
+    color: BrandColors.white,
     fontWeight: '600',
   },
   svgContainer: {

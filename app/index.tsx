@@ -3,7 +3,7 @@ import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import ExperimentCard from '@/components/experiment-card';
-import { CustomFonts } from '@/constants/theme';
+import { BrandColors, CustomFonts } from '@/constants/theme';
 
 const EXPERIMENTS = [
   {
@@ -70,7 +70,7 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fafafa',
+    backgroundColor: BrandColors.almostWhite,
   },
   contentContainer: {
     paddingHorizontal: 20,

@@ -2,6 +2,7 @@ import { Image, Pressable, StyleSheet, View } from 'react-native';
 
 import ManInBlack from '@/assets/images/man-in-black.svg';
 import DefaultText from '@/components/default-text';
+import { BrandColors } from '@/constants/theme';
 
 type AvatarType = 'photo' | 'initials' | 'incognito';
 
@@ -58,7 +59,7 @@ export default function Avatar({
           styles.incognitoContainer,
           { width: size, height: size, borderRadius },
         ]}>
-        <ManInBlack width={size} height={size} color="#a069aa" />
+        <ManInBlack width={size} height={size} color={BrandColors.darkPink} />
       </View>
     );
   })();
@@ -79,18 +80,18 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   initialsContainer: {
-    backgroundColor: '#a069aa',
+    backgroundColor: BrandColors.darkPink,
     justifyContent: 'center',
     alignItems: 'center',
   },
   initialsText: {
-    color: '#ffffff',
+    color: BrandColors.white,
     fontWeight: '700',
     textAlign: 'center',
   },
   incognitoContainer: {
     borderWidth: 2,
-    borderColor: '#a069aa',
+    borderColor: BrandColors.darkPink,
     justifyContent: 'center',
     alignItems: 'center',
   },

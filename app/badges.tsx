@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
 
 import NotificationBadge from '@/components/notification-badge';
-import { CustomFonts } from '@/constants/theme';
+import { BrandColors, CustomFonts } from '@/constants/theme';
 
 export default function BadgesScreen() {
   const [isLargeFont, setIsLargeFont] = useState(true);
@@ -24,7 +24,7 @@ export default function BadgesScreen() {
             value={isLargeFont}
             onValueChange={setIsLargeFont}
             trackColor={{ false: '#d4d4d4', true: '#e34f6a' }}
-            thumbColor="#ffffff"
+            thumbColor={BrandColors.white}
           />
         </View>
       </View>
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     fontSize: 32,
     fontFamily: CustomFonts.bold,
     fontWeight: 'bold',
-    color: '#000000',
+    color: BrandColors.black,
     marginBottom: 4,
   },
   subtitle: {
@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: CustomFonts.default,
     fontWeight: '600',
-    color: '#000000',
+    color: BrandColors.black,
   },
   section: {
     marginBottom: 32,
@@ -155,11 +155,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: CustomFonts.bold,
     fontWeight: 'bold',
-    color: '#000000',
+    color: BrandColors.black,
     lineHeight: 24,
   },
   menuCard: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: BrandColors.white,
     borderRadius: 8,
     overflow: 'hidden',
   },
@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
   },
   menuIcon: {
     fontSize: 16,
-    color: '#000000',
+    color: BrandColors.black,
     width: 24,
     textAlign: 'center',
   },
@@ -181,11 +181,11 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 16,
     fontFamily: CustomFonts.default,
-    color: '#000000',
+    color: BrandColors.black,
     lineHeight: 24,
   },
   drilldownCard: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: BrandColors.white,
     borderRadius: 8,
     overflow: 'hidden',
   },
@@ -200,7 +200,7 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 20,
     fontFamily: CustomFonts.default,
-    color: '#000000',
+    color: BrandColors.black,
     lineHeight: 24,
   },
   chevron: {

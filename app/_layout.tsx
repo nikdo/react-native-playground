@@ -16,6 +16,7 @@ export default function RootLayout() {
     SaansMedium: require('../assets/fonts/SaansMedium.ttf'),
     SaansBold: require('../assets/fonts/SaansBold.ttf'),
     'BagossCondensed-Bold': require('../assets/fonts/BagossCondensed-Bold.ttf'),
+    'MaterialSymbolsRounded-Filled': require('../assets/fonts/MaterialSymbolsRounded-Filled.ttf'),
   });
 
   useEffect(() => {

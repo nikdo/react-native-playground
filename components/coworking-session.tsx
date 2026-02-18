@@ -2,6 +2,7 @@ import { StyleSheet, Switch, View } from 'react-native';
 
 import Avatar from '@/components/avatar';
 import DefaultText from '@/components/default-text';
+import { BrandColors } from '@/constants/theme';
 
 export type CoworkingMember = {
   id: string;
@@ -36,8 +37,8 @@ export default function CoworkingSession({
         <Switch
           value={enabled}
           onValueChange={onToggle}
-          trackColor={{ false: '#e9e9ea', true: '#a069aa' }}
-          thumbColor="#ffffff"
+          trackColor={{ false: '#e9e9ea', true: BrandColors.darkPink }}
+          thumbColor={BrandColors.white}
         />
       </View>
 
@@ -71,7 +72,7 @@ export default function CoworkingSession({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fad2ff',
+    backgroundColor: BrandColors.pink,
     borderRadius: 16,
     padding: 16,
     paddingVertical: 12,
@@ -89,13 +90,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '700',
     lineHeight: 24,
-    color: '#000000',
+    color: BrandColors.black,
   },
   subtitle: {
     fontSize: 14,
     fontWeight: '500',
     lineHeight: 20,
-    color: '#000000',
+    color: BrandColors.black,
   },
   intelContainer: {
     gap: 8,
@@ -109,7 +110,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '700',
     lineHeight: 20,
-    color: '#a069aa',
+    color: BrandColors.darkPink,
   },
   facesGrid: {
     flexDirection: 'row',

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 
 import CoworkingSession, { CoworkingMember } from '@/components/coworking-session';
+import { BrandColors } from '@/constants/theme';
 
 // Sample coworking members data
 const SAMPLE_MEMBERS: CoworkingMember[] = [
@@ -68,7 +69,7 @@ export default function CoworkingScreen() {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: '#fafafa',
+    backgroundColor: BrandColors.almostWhite,
   },
   container: {
     flex: 1,

@@ -1,6 +1,6 @@
 import { StyleSheet, Text, TextStyle, View, ViewStyle } from 'react-native';
 
-import { BASE_UNIT, CustomFonts } from '@/constants/theme';
+import { BASE_UNIT, BrandColors, CustomFonts } from '@/constants/theme';
 
 type BadgeSize = 'regular' | 'compact';
 
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: CustomFonts.bold,
     fontWeight: 'bold',
-    color: '#FFFFFF',
+    color: BrandColors.white,
     textAlign: 'center',
   },
   regularText: {

@@ -1,6 +1,6 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
-import { CustomFonts } from '@/constants/theme';
+import { BrandColors, CustomFonts } from '@/constants/theme';
 
 type PrimaryButtonProps = {
   text: string;
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   button: {
-    backgroundColor: '#000000',
+    backgroundColor: BrandColors.black,
     borderRadius: 30,
     paddingVertical: 16,
     paddingHorizontal: 48,
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   buttonText: {
-    color: '#FFFFFF',
+    color: BrandColors.white,
     fontSize: 16,
     fontWeight: '600',
     fontFamily: CustomFonts.default,
