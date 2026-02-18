@@ -3,6 +3,7 @@ import { View, Image, Switch, Text, StyleSheet } from 'react-native';
 
 import Button from '@/components/button';
 import MaterialIcon from '@/components/material-icon';
+import SwatchToggle from '@/components/swatch-toggle';
 import { BrandColors, CustomFonts } from '@/constants/theme';
 
 const ICONS = {
@@ -15,9 +16,10 @@ const ICONS = {
 export default function ButtonsScreen() {
   const [showOverlay, setShowOverlay] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
+  const [backgroundColor, setBackgroundColor] = useState(BrandColors.white);
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor }]}>
       <View style={styles.content}>
         {/* Row 1: Primary Regular */}
         <View style={styles.row}>
@@ -84,7 +86,11 @@ export default function ButtonsScreen() {
         />
       )}
 
-      <View style={styles.controls}>
+      <View style={styles.swatchBar}>
+        <SwatchToggle onColorChange={setBackgroundColor} />
+      </View>
+
+      <View style={styles.debugControls}>
         <View style={styles.toggleRow}>
           <Text style={styles.toggleLabel}>Disabled</Text>
           <Switch
@@ -111,7 +117,6 @@ export default function ButtonsScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: BrandColors.white,
   },
   content: {
     paddingLeft: 24,
@@ -134,9 +139,15 @@ const styles = StyleSheet.create({
     height: 232,
     opacity: 0.8,
   },
-  controls: {
+  swatchBar: {
     position: 'absolute',
     bottom: 48,
+    left: 0,
+    right: 0,
+  },
+  debugControls: {
+    position: 'absolute',
+    bottom: 48 + 64 + 16,
     left: 24,
     right: 24,
     gap: 16,

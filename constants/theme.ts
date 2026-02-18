@@ -66,6 +66,8 @@ export const BrandColors = {
   green: '#73F096',
   darkPeach: '#B46964',
   peach: '#FAA08C',
+  darkYellow: '#BEB450',
+  yellow: '#FAFA8C',
 } as const;
 
 export const BASE_UNIT = 8;
