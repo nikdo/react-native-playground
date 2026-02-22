@@ -16,6 +16,8 @@ type ButtonProps = {
   icon?: ReactNode;
   onPress?: () => void;
   disabled?: boolean;
+  color?: string;
+  inverted?: boolean;
 };
 
 // White overlay at 44% on black (#000) ≈ #707070 (close to target #6E7878).
@@ -29,20 +31,26 @@ export default function Button({
   icon,
   onPress,
   disabled = false,
+  color = BrandColors.black,
+  inverted = false,
 }: ButtonProps) {
   const isPrimary = type === 'primary';
   const isRegular = size === 'regular';
 
+  const inkColor = inverted ? BrandColors.white : color;
+  const onInkColor = inverted ? color : BrandColors.white;
+
   const buttonStyle: ViewStyle[] = [
     styles.buttonBase,
-    isPrimary ? styles.primaryBackground : styles.subtleBackground,
+    { borderColor: inkColor },
+    isPrimary ? { backgroundColor: inkColor } : styles.subtleBackground,
     isRegular ? styles.regularPadding : styles.compactPadding,
     disabled && styles.disabledBorder,
   ].filter(Boolean) as ViewStyle[];
 
   const textStyle: TextStyle[] = [
     styles.textBase,
-    isPrimary ? styles.primaryText : styles.subtleText,
+    isPrimary ? { color: onInkColor } : { color: inkColor },
     isRegular ? styles.regularText : styles.compactText,
   ];
 
@@ -61,7 +69,9 @@ export default function Button({
             <View
               style={[
                 StyleSheet.absoluteFill,
-                isPrimary ? styles.pressedOverlayPrimary : styles.pressedOverlaySubtle,
+                isPrimary
+                  ? inverted ? styles.pressedOverlayInverted : styles.pressedOverlayPrimary
+                  : styles.pressedOverlaySubtle,
               ]}
             />
           )}
@@ -77,18 +87,14 @@ export default function Button({
 const styles = StyleSheet.create({
   buttonBase: {
     borderWidth: 2,
-    borderColor: BrandColors.black,
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
     gap: base,
     overflow: 'hidden',
   },
-  primaryBackground: {
-    backgroundColor: BrandColors.black,
-  },
   subtleBackground: {
-    backgroundColor: BrandColors.white,
+    backgroundColor: 'transparent',
   },
   regularPadding: {
     paddingVertical: 1.5 * base - 2, // -2 compensating for border
@@ -107,12 +113,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
   },
-  primaryText: {
-    color: BrandColors.white,
-  },
-  subtleText: {
-    color: BrandColors.black,
-  },
   regularText: {
     fontSize: 2 * base,
     lineHeight: 3 * base,
@@ -123,6 +123,9 @@ const styles = StyleSheet.create({
   },
   pressedOverlayPrimary: {
     backgroundColor: 'rgba(255, 255, 255, 0.25)',
+  },
+  pressedOverlayInverted: {
+    backgroundColor: 'rgba(0, 0, 0, 0.25)',
   },
   pressedOverlaySubtle: {
     backgroundColor: 'rgba(0, 0, 0, 0.08)',

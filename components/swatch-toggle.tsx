@@ -23,7 +23,7 @@ const SWATCHES: SwatchConfig[] = [
 type Selection = { swatchId: string; shade: 'dark' | 'light' };
 
 type SwatchToggleProps = {
-  onColorChange: (color: string) => void;
+  onColorChange: (colors: { background: string; button: string; inverted: boolean }) => void;
 };
 
 export default function SwatchToggle({ onColorChange }: SwatchToggleProps) {
@@ -31,7 +31,11 @@ export default function SwatchToggle({ onColorChange }: SwatchToggleProps) {
 
   const handleSelect = (swatch: SwatchConfig, shade: 'dark' | 'light') => {
     setSelection({ swatchId: swatch.id, shade });
-    onColorChange(shade === 'dark' ? swatch.dark : swatch.light);
+    if (shade === 'light') {
+      onColorChange({ background: swatch.light, button: swatch.dark, inverted: false });
+    } else {
+      onColorChange({ background: swatch.dark, button: swatch.dark, inverted: true });
+    }
   };
 
   return (

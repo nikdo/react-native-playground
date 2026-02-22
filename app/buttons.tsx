@@ -16,7 +16,9 @@ const ICONS = {
 export default function ButtonsScreen() {
   const [showOverlay, setShowOverlay] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
-  const [backgroundColor, setBackgroundColor] = useState(BrandColors.white);
+  const [backgroundColor, setBackgroundColor] = useState<string>(BrandColors.white);
+  const [buttonColor, setButtonColor] = useState<string>(BrandColors.black);
+  const [inverted, setInverted] = useState(false);
 
   return (
     <View style={[styles.container, { backgroundColor }]}>
@@ -24,56 +26,64 @@ export default function ButtonsScreen() {
         {/* Row 1: Primary Regular */}
         <View style={styles.row}>
           <View style={styles.leftCol}>
-            <Button caption="Submit" type="primary" size="regular" disabled={isDisabled} />
+            <Button caption="Submit" type="primary" size="regular" color={buttonColor} inverted={inverted} disabled={isDisabled} />
           </View>
           <Button
             caption="Confirm"
             type="primary"
             size="regular"
+            color={buttonColor}
+            inverted={inverted}
             disabled={isDisabled}
-            icon={<MaterialIcon name={ICONS.check_circle} size={24} color={BrandColors.white} />}
+            icon={<MaterialIcon name={ICONS.check_circle} size={24} color={inverted ? buttonColor : BrandColors.white} />}
           />
         </View>
 
         {/* Row 2: Subtle Regular */}
         <View style={styles.row}>
           <View style={styles.leftCol}>
-            <Button caption="Reset all" type="subtle" size="regular" disabled={isDisabled} />
+            <Button caption="Reset all" type="subtle" size="regular" color={buttonColor} inverted={inverted} disabled={isDisabled} />
           </View>
           <Button
             caption="Reject"
             type="subtle"
             size="regular"
+            color={buttonColor}
+            inverted={inverted}
             disabled={isDisabled}
-            icon={<MaterialIcon name={ICONS.cancel} size={24} color={BrandColors.black} />}
+            icon={<MaterialIcon name={ICONS.cancel} size={24} color={inverted ? BrandColors.white : buttonColor} />}
           />
         </View>
 
         {/* Row 3: Primary Compact */}
         <View style={styles.row}>
           <View style={styles.leftCol}>
-            <Button caption="Invite friends" type="primary" size="compact" disabled={isDisabled} />
+            <Button caption="Invite friends" type="primary" size="compact" color={buttonColor} inverted={inverted} disabled={isDisabled} />
           </View>
           <Button
             caption="Share"
             type="primary"
             size="compact"
+            color={buttonColor}
+            inverted={inverted}
             disabled={isDisabled}
-            icon={<MaterialIcon name={ICONS.share} size={20} color={BrandColors.white} />}
+            icon={<MaterialIcon name={ICONS.share} size={20} color={inverted ? buttonColor : BrandColors.white} />}
           />
         </View>
 
         {/* Row 4: Subtle Compact */}
         <View style={styles.row}>
           <View style={styles.leftCol}>
-            <Button caption="Show more" type="subtle" size="compact" disabled={isDisabled} />
+            <Button caption="Show more" type="subtle" size="compact" color={buttonColor} inverted={inverted} disabled={isDisabled} />
           </View>
           <Button
             caption="Save"
             type="subtle"
             size="compact"
+            color={buttonColor}
+            inverted={inverted}
             disabled={isDisabled}
-            icon={<MaterialIcon name={ICONS.bookmark} size={20} color={BrandColors.black} />}
+            icon={<MaterialIcon name={ICONS.bookmark} size={20} color={inverted ? BrandColors.white : buttonColor} />}
           />
         </View>
       </View>
@@ -87,7 +97,13 @@ export default function ButtonsScreen() {
       )}
 
       <View style={styles.swatchBar}>
-        <SwatchToggle onColorChange={setBackgroundColor} />
+        <SwatchToggle
+          onColorChange={({ background, button, inverted: inv }) => {
+            setBackgroundColor(background);
+            setButtonColor(button);
+            setInverted(inv);
+          }}
+        />
       </View>
 
       <View style={styles.debugControls}>
