@@ -1,7 +1,7 @@
 import { View, Text, TextStyle } from 'react-native';
 
 type MaterialIconProps = {
-  name: string; // Unicode codepoint string, e.g. '\uf0be'
+  name: string; // Icon name, e.g. 'check_circle'
   size: number;
   color: string;
 };

@@ -1,22 +1,16 @@
-import { useState } from 'react';
-import { View, Image, Switch, Text, StyleSheet } from 'react-native';
+import { useState } from "react";
+import { View, Image, Switch, Text, StyleSheet } from "react-native";
 
-import Button from '@/components/button';
-import MaterialIcon from '@/components/material-icon';
-import SwatchToggle from '@/components/swatch-toggle';
-import { BrandColors, CustomFonts } from '@/constants/theme';
-
-const ICONS = {
-  check_circle: '\uf0be',
-  cancel: '\ue888',
-  share: '\ue80d',
-  bookmark: '\ue8e7',
-};
+import Button from "@/components/button";
+import SwatchToggle from "@/components/swatch-toggle";
+import { BrandColors, CustomFonts } from "@/constants/theme";
 
 export default function ButtonsScreen() {
   const [showOverlay, setShowOverlay] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
-  const [backgroundColor, setBackgroundColor] = useState<string>(BrandColors.white);
+  const [backgroundColor, setBackgroundColor] = useState<string>(
+    BrandColors.white,
+  );
   const [buttonColor, setButtonColor] = useState<string>(BrandColors.black);
   const [inverted, setInverted] = useState(false);
 
@@ -26,7 +20,14 @@ export default function ButtonsScreen() {
         {/* Row 1: Primary Regular */}
         <View style={styles.row}>
           <View style={styles.leftCol}>
-            <Button caption="Submit" type="primary" size="regular" color={buttonColor} inverted={inverted} disabled={isDisabled} />
+            <Button
+              caption="Submit"
+              type="primary"
+              size="regular"
+              color={buttonColor}
+              inverted={inverted}
+              disabled={isDisabled}
+            />
           </View>
           <Button
             caption="Confirm"
@@ -35,14 +36,21 @@ export default function ButtonsScreen() {
             color={buttonColor}
             inverted={inverted}
             disabled={isDisabled}
-            icon={<MaterialIcon name={ICONS.check_circle} size={24} color={inverted ? buttonColor : BrandColors.white} />}
+            icon="check_circle"
           />
         </View>
 
         {/* Row 2: Subtle Regular */}
         <View style={styles.row}>
           <View style={styles.leftCol}>
-            <Button caption="Reset all" type="subtle" size="regular" color={buttonColor} inverted={inverted} disabled={isDisabled} />
+            <Button
+              caption="Reset all"
+              type="subtle"
+              size="regular"
+              color={buttonColor}
+              inverted={inverted}
+              disabled={isDisabled}
+            />
           </View>
           <Button
             caption="Reject"
@@ -51,14 +59,21 @@ export default function ButtonsScreen() {
             color={buttonColor}
             inverted={inverted}
             disabled={isDisabled}
-            icon={<MaterialIcon name={ICONS.cancel} size={24} color={inverted ? BrandColors.white : buttonColor} />}
+            icon="cancel"
           />
         </View>
 
         {/* Row 3: Primary Compact */}
         <View style={styles.row}>
           <View style={styles.leftCol}>
-            <Button caption="Invite friends" type="primary" size="compact" color={buttonColor} inverted={inverted} disabled={isDisabled} />
+            <Button
+              caption="Invite friends"
+              type="primary"
+              size="compact"
+              color={buttonColor}
+              inverted={inverted}
+              disabled={isDisabled}
+            />
           </View>
           <Button
             caption="Share"
@@ -67,14 +82,21 @@ export default function ButtonsScreen() {
             color={buttonColor}
             inverted={inverted}
             disabled={isDisabled}
-            icon={<MaterialIcon name={ICONS.share} size={20} color={inverted ? buttonColor : BrandColors.white} />}
+            icon="share"
           />
         </View>
 
         {/* Row 4: Subtle Compact */}
         <View style={styles.row}>
           <View style={styles.leftCol}>
-            <Button caption="Show more" type="subtle" size="compact" color={buttonColor} inverted={inverted} disabled={isDisabled} />
+            <Button
+              caption="Show more"
+              type="subtle"
+              size="compact"
+              color={buttonColor}
+              inverted={inverted}
+              disabled={isDisabled}
+            />
           </View>
           <Button
             caption="Save"
@@ -83,14 +105,14 @@ export default function ButtonsScreen() {
             color={buttonColor}
             inverted={inverted}
             disabled={isDisabled}
-            icon={<MaterialIcon name={ICONS.bookmark} size={20} color={inverted ? BrandColors.white : buttonColor} />}
+            icon="bookmark"
           />
         </View>
       </View>
 
       {showOverlay && (
         <Image
-          source={require('../assets/images/buttons-benchmark.png')}
+          source={require("../assets/images/buttons-benchmark.png")}
           style={styles.overlay}
           resizeMode="contain"
         />
@@ -112,7 +134,7 @@ export default function ButtonsScreen() {
           <Switch
             value={isDisabled}
             onValueChange={setIsDisabled}
-            trackColor={{ false: '#d4d4d4', true: BrandColors.black }}
+            trackColor={{ false: "#d4d4d4", true: BrandColors.black }}
             thumbColor={BrandColors.white}
           />
         </View>
@@ -121,7 +143,7 @@ export default function ButtonsScreen() {
           <Switch
             value={showOverlay}
             onValueChange={setShowOverlay}
-            trackColor={{ false: '#d4d4d4', true: BrandColors.black }}
+            trackColor={{ false: "#d4d4d4", true: BrandColors.black }}
             thumbColor={BrandColors.white}
           />
         </View>
@@ -140,15 +162,15 @@ const styles = StyleSheet.create({
     gap: 24,
   },
   row: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
+    flexDirection: "row",
+    alignItems: "flex-start",
   },
   leftCol: {
     width: 182,
-    alignItems: 'flex-start',
+    alignItems: "flex-start",
   },
   overlay: {
-    position: 'absolute',
+    position: "absolute",
     left: 24,
     top: 48,
     width: 342,
@@ -156,22 +178,22 @@ const styles = StyleSheet.create({
     opacity: 0.8,
   },
   swatchBar: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 48,
     left: 0,
     right: 0,
   },
   debugControls: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 48 + 64 + 16,
     left: 24,
     right: 24,
     gap: 16,
   },
   toggleRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   toggleLabel: {
     fontFamily: CustomFonts.default,

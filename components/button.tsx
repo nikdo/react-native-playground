@@ -1,6 +1,6 @@
 import { Pressable, StyleSheet, Text, View, ViewStyle, TextStyle } from 'react-native';
-import { ReactNode } from 'react';
 
+import MaterialIcon from '@/components/material-icon';
 import { BrandColors, CustomFonts } from '@/constants/theme';
 
 // Base unit for 8pt grid system
@@ -13,7 +13,7 @@ type ButtonProps = {
   caption?: string;
   type?: ButtonType;
   size?: ButtonSize;
-  icon?: ReactNode;
+  icon?: string;
   onPress?: () => void;
   disabled?: boolean;
   color?: string;
@@ -64,7 +64,13 @@ export default function Button({
           {pressed && !disabled && !isPrimary && (
             <View style={[StyleSheet.absoluteFill, { backgroundColor: inkColor, opacity: 0.08 }]} />
           )}
-          {icon}
+          {icon && (
+            <MaterialIcon
+              name={icon}
+              size={isRegular ? 24 : 20}
+              color={isPrimary ? onInkColor : inkColor}
+            />
+          )}
           <Text style={textStyle}>{caption}</Text>
         </>
       )}
