@@ -20,10 +20,6 @@ type ButtonProps = {
   inverted?: boolean;
 };
 
-// White overlay at 44% on black (#000) ≈ #707070 (close to target #6E7878).
-// On white bg it's invisible; on black text/icons it lightens them to gray.
-const DISABLED_OVERLAY_OPACITY = 0.44;
-
 export default function Button({
   caption = 'Submit',
   type = 'primary',
@@ -45,7 +41,6 @@ export default function Button({
     { borderColor: inkColor },
     isPrimary ? { backgroundColor: inkColor } : styles.subtleBackground,
     isRegular ? styles.regularPadding : styles.compactPadding,
-    disabled && styles.disabledBorder,
   ].filter(Boolean) as ViewStyle[];
 
   const textStyle: TextStyle[] = [
@@ -58,26 +53,19 @@ export default function Button({
     <Pressable
       style={({ pressed }) => [
         ...buttonStyle,
-        pressed && !disabled && { overflow: 'hidden' as const },
+        pressed && !disabled && isPrimary && { opacity: 0.75 },
+        disabled && { opacity: 0.56 },
       ]}
       onPress={onPress}
       disabled={disabled}
     >
       {({ pressed }) => (
         <>
-          {pressed && !disabled && (
-            <View
-              style={[
-                StyleSheet.absoluteFill,
-                isPrimary
-                  ? inverted ? styles.pressedOverlayInverted : styles.pressedOverlayPrimary
-                  : styles.pressedOverlaySubtle,
-              ]}
-            />
+          {pressed && !disabled && !isPrimary && (
+            <View style={[StyleSheet.absoluteFill, { backgroundColor: inkColor, opacity: 0.08 }]} />
           )}
           {icon}
           <Text style={textStyle}>{caption}</Text>
-          {disabled && <View style={[StyleSheet.absoluteFill, styles.disabledOverlay]} />}
         </>
       )}
     </Pressable>
@@ -120,20 +108,5 @@ const styles = StyleSheet.create({
   compactText: {
     fontSize: 14, // design exception
     lineHeight: 20, // design exception
-  },
-  pressedOverlayPrimary: {
-    backgroundColor: 'rgba(255, 255, 255, 0.25)',
-  },
-  pressedOverlayInverted: {
-    backgroundColor: 'rgba(0, 0, 0, 0.25)',
-  },
-  pressedOverlaySubtle: {
-    backgroundColor: 'rgba(0, 0, 0, 0.08)',
-  },
-  disabledBorder: {
-    borderColor: '#6E7878',
-  },
-  disabledOverlay: {
-    backgroundColor: `rgba(255, 255, 255, ${DISABLED_OVERLAY_OPACITY})`,
   },
 });
