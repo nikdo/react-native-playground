@@ -137,17 +137,7 @@ export default function ButtonsScreen() {
         />
       )}
 
-      <View style={styles.swatchBar}>
-        <SwatchToggle
-          onColorChange={({ background, button, inverted: inv }) => {
-            setBackgroundColor(background);
-            setButtonColor(button);
-            setInverted(inv);
-          }}
-        />
-      </View>
-
-      <View style={styles.debugControls}>
+      <View style={styles.bottomSheet}>
         <View style={styles.toggleRow}>
           <Text style={styles.toggleLabel}>Loading</Text>
           <Switch
@@ -175,6 +165,13 @@ export default function ButtonsScreen() {
             thumbColor={BrandColors.white}
           />
         </View>
+        <SwatchToggle
+          onColorChange={({ background, button, inverted: inv }) => {
+            setBackgroundColor(background);
+            setButtonColor(button);
+            setInverted(inv);
+          }}
+        />
       </View>
     </View>
   );
@@ -205,17 +202,15 @@ const styles = StyleSheet.create({
     height: 232,
     opacity: 0.8,
   },
-  swatchBar: {
+  bottomSheet: {
     position: "absolute",
-    bottom: 48,
+    bottom: 0,
     left: 0,
     right: 0,
-  },
-  debugControls: {
-    position: "absolute",
-    bottom: 48 + 64 + 16,
-    left: 24,
-    right: 24,
+    backgroundColor: BrandColors.white,
+    paddingHorizontal: 24,
+    paddingTop: 24,
+    paddingBottom: 48,
     gap: 16,
   },
   toggleRow: {
