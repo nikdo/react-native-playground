@@ -8,6 +8,7 @@ import { BrandColors, CustomFonts } from "@/constants/theme";
 export default function ButtonsScreen() {
   const [showOverlay, setShowOverlay] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [backgroundColor, setBackgroundColor] = useState<string>(
     BrandColors.white,
   );
@@ -27,6 +28,7 @@ export default function ButtonsScreen() {
               color={buttonColor}
               inverted={inverted}
               disabled={isDisabled}
+              loading={isLoading}
             />
           </View>
           <Button
@@ -36,6 +38,7 @@ export default function ButtonsScreen() {
             color={buttonColor}
             inverted={inverted}
             disabled={isDisabled}
+            loading={isLoading}
             icon="check_circle"
           />
         </View>
@@ -50,6 +53,7 @@ export default function ButtonsScreen() {
               color={buttonColor}
               inverted={inverted}
               disabled={isDisabled}
+              loading={isLoading}
             />
           </View>
           <Button
@@ -59,6 +63,7 @@ export default function ButtonsScreen() {
             color={buttonColor}
             inverted={inverted}
             disabled={isDisabled}
+            loading={isLoading}
             icon="cancel"
           />
         </View>
@@ -73,6 +78,7 @@ export default function ButtonsScreen() {
               color={buttonColor}
               inverted={inverted}
               disabled={isDisabled}
+              loading={isLoading}
             />
           </View>
           <Button
@@ -82,6 +88,7 @@ export default function ButtonsScreen() {
             color={buttonColor}
             inverted={inverted}
             disabled={isDisabled}
+            loading={isLoading}
             icon="share"
           />
         </View>
@@ -96,6 +103,7 @@ export default function ButtonsScreen() {
               color={buttonColor}
               inverted={inverted}
               disabled={isDisabled}
+              loading={isLoading}
             />
           </View>
           <Button
@@ -105,6 +113,7 @@ export default function ButtonsScreen() {
             color={buttonColor}
             inverted={inverted}
             disabled={isDisabled}
+            loading={isLoading}
             icon="bookmark"
           />
         </View>
@@ -116,6 +125,7 @@ export default function ButtonsScreen() {
           color={buttonColor}
           inverted={inverted}
           disabled={isDisabled}
+          loading={isLoading}
         />
       </View>
 
@@ -138,6 +148,15 @@ export default function ButtonsScreen() {
       </View>
 
       <View style={styles.debugControls}>
+        <View style={styles.toggleRow}>
+          <Text style={styles.toggleLabel}>Loading</Text>
+          <Switch
+            value={isLoading}
+            onValueChange={setIsLoading}
+            trackColor={{ false: "#d4d4d4", true: BrandColors.black }}
+            thumbColor={BrandColors.white}
+          />
+        </View>
         <View style={styles.toggleRow}>
           <Text style={styles.toggleLabel}>Disabled</Text>
           <Switch

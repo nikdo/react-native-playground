@@ -1,13 +1,27 @@
-import { Pressable, StyleSheet, Text, View, ViewStyle, TextStyle } from 'react-native';
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+  ViewStyle,
+  TextStyle,
+} from "react-native";
 
-import MaterialIcon from '@/components/material-icon';
-import { BrandColors, CustomFonts } from '@/constants/theme';
+import ShimmerOverlay from "@/components/shimmer-overlay";
+import MaterialIcon from "@/components/material-icon";
+import { BrandColors, CustomFonts } from "@/constants/theme";
 
 // Base unit for 8pt grid system
 const base = 8;
 
-type ButtonType = 'primary' | 'subtle';
-type ButtonSize = 'regular' | 'compact';
+const opacity = {
+  disabled: 0.56,
+  pressed: 0.75,
+  pressedSubtleOverlay: 0.08,
+};
+
+type ButtonType = "primary" | "subtle";
+type ButtonSize = "regular" | "compact";
 
 type ButtonProps = {
   caption?: string;
@@ -16,29 +30,34 @@ type ButtonProps = {
   icon?: string;
   onPress?: () => void;
   disabled?: boolean;
+  loading?: boolean;
   color?: string;
   inverted?: boolean;
 };
 
 export default function Button({
-  caption = 'Submit',
-  type = 'primary',
-  size = 'regular',
+  caption = "Submit",
+  type = "primary",
+  size = "regular",
   icon,
   onPress,
   disabled = false,
+  loading = false,
   color = BrandColors.black,
   inverted = false,
 }: ButtonProps) {
-  const isPrimary = type === 'primary';
-  const isRegular = size === 'regular';
+  const isPrimary = type === "primary";
+  const isRegular = size === "regular";
+  const isDisabled = disabled || loading;
 
   const inkColor = inverted ? BrandColors.white : color;
   const onInkColor = inverted ? color : BrandColors.white;
 
   const buttonStyle: ViewStyle[] = [
     styles.buttonBase,
-    isPrimary ? { backgroundColor: inkColor, borderColor: 'transparent' } : { borderColor: inkColor },
+    isPrimary
+      ? { backgroundColor: inkColor, borderColor: "transparent" }
+      : { borderColor: inkColor },
     isRegular ? styles.regularPadding : styles.compactPadding,
   ].filter(Boolean) as ViewStyle[];
 
@@ -52,16 +71,27 @@ export default function Button({
     <Pressable
       style={({ pressed }) => [
         ...buttonStyle,
-        pressed && !disabled && isPrimary && { opacity: 0.75 },
-        disabled && { opacity: 0.56 },
+        pressed && !isDisabled && isPrimary && { opacity: opacity.pressed },
+        isDisabled && { opacity: opacity.disabled },
       ]}
       onPress={onPress}
-      disabled={disabled}
+      disabled={isDisabled}
     >
       {({ pressed }) => (
         <>
-          {pressed && !disabled && !isPrimary && (
-            <View style={[StyleSheet.absoluteFill, { backgroundColor: inkColor, opacity: 0.08 }]} />
+          {pressed && !isDisabled && !isPrimary && (
+            <View
+              style={[
+                StyleSheet.absoluteFill,
+                {
+                  backgroundColor: inkColor,
+                  opacity: opacity.pressedSubtleOverlay,
+                },
+              ]}
+            />
+          )}
+          {loading && (
+            <ShimmerOverlay color={isPrimary ? onInkColor : inkColor} />
           )}
           {icon && (
             <MaterialIcon
@@ -80,14 +110,14 @@ export default function Button({
 const styles = StyleSheet.create({
   buttonBase: {
     borderWidth: 2,
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
     gap: base,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   subtleBackground: {
-    backgroundColor: 'transparent',
+    backgroundColor: "transparent",
   },
   regularPadding: {
     paddingVertical: 1.5 * base - 2, // -2 compensating for border
@@ -103,8 +133,8 @@ const styles = StyleSheet.create({
   },
   textBase: {
     fontFamily: CustomFonts.bold,
-    fontWeight: 'bold',
-    textAlign: 'center',
+    fontWeight: "bold",
+    textAlign: "center",
   },
   regularText: {
     fontSize: 2 * base,
