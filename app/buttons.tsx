@@ -1,5 +1,7 @@
-import { useState } from "react";
-import { View, Image, Switch, Text, StyleSheet } from "react-native";
+import { useCallback, useRef, useState } from "react";
+import { View, Image, Switch, Text, StyleSheet, Platform } from "react-native";
+import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import Button from "@/components/button";
 import SwatchToggle from "@/components/swatch-toggle";
@@ -14,6 +16,9 @@ export default function ButtonsScreen() {
   );
   const [buttonColor, setButtonColor] = useState<string>(BrandColors.black);
   const [inverted, setInverted] = useState(false);
+
+  const bottomSheetRef = useRef<BottomSheet>(null);
+  const { bottom: bottomInset } = useSafeAreaInsets();
 
   return (
     <View style={[styles.container, { backgroundColor }]}>
@@ -137,42 +142,53 @@ export default function ButtonsScreen() {
         />
       )}
 
-      <View style={styles.bottomSheet}>
-        <View style={styles.toggleRow}>
-          <Text style={styles.toggleLabel}>Loading</Text>
-          <Switch
-            value={isLoading}
-            onValueChange={setIsLoading}
-            trackColor={{ false: "#d4d4d4", true: BrandColors.black }}
-            thumbColor={BrandColors.white}
+      <BottomSheet
+        ref={bottomSheetRef}
+        snapPoints={[72 + bottomInset]}
+        index={1}
+        enableDynamicSizing={true}
+        backgroundStyle={styles.sheetBackground}
+        handleIndicatorStyle={styles.sheetHandle}
+        style={styles.sheetShadow}
+      >
+        <BottomSheetView style={[styles.sheetContent, { paddingBottom: Math.max(bottomInset, 24) }]}>
+          <Text style={styles.sheetTitle}>Debug Controls</Text>
+          <View style={styles.toggleRow}>
+            <Text style={styles.toggleLabel}>Loading</Text>
+            <Switch
+              value={isLoading}
+              onValueChange={setIsLoading}
+              trackColor={{ false: "#d4d4d4", true: BrandColors.black }}
+              thumbColor={BrandColors.white}
+            />
+          </View>
+          <View style={styles.toggleRow}>
+            <Text style={styles.toggleLabel}>Disabled</Text>
+            <Switch
+              value={isDisabled}
+              onValueChange={setIsDisabled}
+              trackColor={{ false: "#d4d4d4", true: BrandColors.black }}
+              thumbColor={BrandColors.white}
+            />
+          </View>
+          <View style={styles.toggleRow}>
+            <Text style={styles.toggleLabel}>Overlay from Figma</Text>
+            <Switch
+              value={showOverlay}
+              onValueChange={setShowOverlay}
+              trackColor={{ false: "#d4d4d4", true: BrandColors.black }}
+              thumbColor={BrandColors.white}
+            />
+          </View>
+          <SwatchToggle
+            onColorChange={({ background, button, inverted: inv }) => {
+              setBackgroundColor(background);
+              setButtonColor(button);
+              setInverted(inv);
+            }}
           />
-        </View>
-        <View style={styles.toggleRow}>
-          <Text style={styles.toggleLabel}>Disabled</Text>
-          <Switch
-            value={isDisabled}
-            onValueChange={setIsDisabled}
-            trackColor={{ false: "#d4d4d4", true: BrandColors.black }}
-            thumbColor={BrandColors.white}
-          />
-        </View>
-        <View style={styles.toggleRow}>
-          <Text style={styles.toggleLabel}>Overlay from Figma</Text>
-          <Switch
-            value={showOverlay}
-            onValueChange={setShowOverlay}
-            trackColor={{ false: "#d4d4d4", true: BrandColors.black }}
-            thumbColor={BrandColors.white}
-          />
-        </View>
-        <SwatchToggle
-          onColorChange={({ background, button, inverted: inv }) => {
-            setBackgroundColor(background);
-            setButtonColor(button);
-            setInverted(inv);
-          }}
-        />
-      </View>
+        </BottomSheetView>
+      </BottomSheet>
     </View>
   );
 }
@@ -202,16 +218,45 @@ const styles = StyleSheet.create({
     height: 232,
     opacity: 0.8,
   },
-  bottomSheet: {
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
+  sheetBackground: {
     backgroundColor: BrandColors.white,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    ...Platform.select({
+      android: {
+        borderTopWidth: StyleSheet.hairlineWidth,
+        borderLeftWidth: StyleSheet.hairlineWidth,
+        borderRightWidth: StyleSheet.hairlineWidth,
+        borderColor: "rgba(0, 0, 0, 0.15)",
+      },
+    }),
+  },
+  sheetHandle: {
+    backgroundColor: "#C4C4C4",
+    width: 36,
+    height: 4,
+  },
+  sheetShadow: {
+    ...Platform.select({
+      ios: {
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: -4 },
+        shadowOpacity: 0.1,
+        shadowRadius: 8,
+      },
+      android: {
+        elevation: 8,
+      },
+    }),
+  },
+  sheetContent: {
     paddingHorizontal: 24,
-    paddingTop: 24,
-    paddingBottom: 48,
     gap: 16,
+  },
+  sheetTitle: {
+    fontFamily: CustomFonts.bold,
+    fontSize: 18,
+    color: BrandColors.black,
   },
   toggleRow: {
     flexDirection: "row",

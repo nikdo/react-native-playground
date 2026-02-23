@@ -5,6 +5,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import { useColorScheme } from '@/hooks/use-color-scheme';
 
@@ -30,23 +31,25 @@ export default function RootLayout() {
   }
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="index" options={{ headerShown: false }} />
-        <Stack.Screen name="buttons" options={{ title: 'Buttons' }} />
-        <Stack.Screen name="coworking" options={{ title: 'Coworking' }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
-        <Stack.Screen
-          name="profile"
-          options={{
-            presentation: 'fullScreenModal',
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen name="negative-margin" options={{ title: 'Negative Margin' }} />
-        <Stack.Screen name="badges" options={{ title: 'Badges' }} />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+        <Stack>
+          <Stack.Screen name="index" options={{ headerShown: false }} />
+          <Stack.Screen name="buttons" options={{ title: 'Buttons' }} />
+          <Stack.Screen name="coworking" options={{ title: 'Coworking' }} />
+          <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
+          <Stack.Screen
+            name="profile"
+            options={{
+              presentation: 'fullScreenModal',
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen name="negative-margin" options={{ title: 'Negative Margin' }} />
+          <Stack.Screen name="badges" options={{ title: 'Badges' }} />
+        </Stack>
+        <StatusBar style="auto" />
+      </ThemeProvider>
+    </GestureHandlerRootView>
   );
 }

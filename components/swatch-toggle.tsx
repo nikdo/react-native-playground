@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 
 import ColorSwatch from "./color-swatch";
 import { BrandColors, CustomFonts } from "@/constants/theme";
@@ -56,7 +57,11 @@ export default function SwatchToggle({ onColorChange }: SwatchToggleProps) {
   return (
     <View style={styles.container}>
       <Text style={styles.label}>Background color</Text>
-      <View style={styles.row}>
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.row}
+      >
         {SWATCHES.map((swatch) => (
           <ColorSwatch
             key={swatch.id}
@@ -69,7 +74,7 @@ export default function SwatchToggle({ onColorChange }: SwatchToggleProps) {
             onSelectLight={() => handleSelect(swatch, "light")}
           />
         ))}
-      </View>
+      </ScrollView>
     </View>
   );
 }
