@@ -100,7 +100,7 @@ export default function Button({
               color={isFilled ? onInkColor : inkColor}
             />
           )}
-          <Text style={textStyle}>{caption}</Text>
+          <Text style={textStyle} numberOfLines={2} ellipsizeMode="tail">{caption}</Text>
         </>
       )}
     </Pressable>

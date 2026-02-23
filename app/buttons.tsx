@@ -1,5 +1,5 @@
 import { useCallback, useRef, useState } from "react";
-import { View, Image, Switch, Text, StyleSheet, Platform } from "react-native";
+import { View, Image, Switch, Text, ScrollView, StyleSheet, Platform } from "react-native";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -22,7 +22,7 @@ export default function ButtonsScreen() {
 
   return (
     <View style={[styles.container, { backgroundColor }]}>
-      <View style={styles.content}>
+      <ScrollView style={styles.content} contentContainerStyle={styles.contentInner}>
         {/* Row 1: Filled Regular */}
         <View style={styles.row}>
           <View style={styles.leftCol}>
@@ -132,7 +132,33 @@ export default function ButtonsScreen() {
           disabled={isDisabled}
           loading={isLoading}
         />
-      </View>
+
+        {/* Long text: wraps to two lines then ellipsis */}
+        <View style={{ flexDirection: "row", gap: 16 }}>
+          <View style={{ flex: 1 }}>
+            <Button
+              caption="This is a very long button label"
+              variant="filled"
+              size="regular"
+              color={buttonColor}
+              inverted={inverted}
+              disabled={isDisabled}
+              loading={isLoading}
+            />
+          </View>
+          <View style={{ flex: 1 }}>
+            <Button
+              caption="An extremely long label that should be truncated with ellipsis"
+              variant="outlined"
+              size="regular"
+              color={buttonColor}
+              inverted={inverted}
+              disabled={isDisabled}
+              loading={isLoading}
+            />
+          </View>
+        </View>
+      </ScrollView>
 
       {showOverlay && (
         <Image
@@ -152,9 +178,9 @@ export default function ButtonsScreen() {
         style={styles.sheetShadow}
       >
         <BottomSheetView style={[styles.sheetContent, { paddingBottom: Math.max(bottomInset, 24) }]}>
-          <Text style={styles.sheetTitle}>Debug Controls</Text>
+          <Text style={styles.sheetTitle} maxFontSizeMultiplier={1}>Debug Controls</Text>
           <View style={styles.toggleRow}>
-            <Text style={styles.toggleLabel}>Loading</Text>
+            <Text style={styles.toggleLabel} maxFontSizeMultiplier={1}>Loading</Text>
             <Switch
               value={isLoading}
               onValueChange={setIsLoading}
@@ -163,7 +189,7 @@ export default function ButtonsScreen() {
             />
           </View>
           <View style={styles.toggleRow}>
-            <Text style={styles.toggleLabel}>Disabled</Text>
+            <Text style={styles.toggleLabel} maxFontSizeMultiplier={1}>Disabled</Text>
             <Switch
               value={isDisabled}
               onValueChange={setIsDisabled}
@@ -172,7 +198,7 @@ export default function ButtonsScreen() {
             />
           </View>
           <View style={styles.toggleRow}>
-            <Text style={styles.toggleLabel}>Overlay from Figma</Text>
+            <Text style={styles.toggleLabel} maxFontSizeMultiplier={1}>Overlay from Figma</Text>
             <Switch
               value={showOverlay}
               onValueChange={setShowOverlay}
@@ -199,7 +225,10 @@ const styles = StyleSheet.create({
   },
   content: {
     paddingHorizontal: 24,
+  },
+  contentInner: {
     paddingTop: 48,
+    paddingBottom: 360,
     gap: 24,
   },
   row: {

@@ -56,7 +56,7 @@ export default function SwatchToggle({ onColorChange }: SwatchToggleProps) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>Background color</Text>
+      <Text style={styles.label} maxFontSizeMultiplier={1}>Background color</Text>
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
