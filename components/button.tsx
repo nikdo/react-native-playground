@@ -38,8 +38,7 @@ export default function Button({
 
   const buttonStyle: ViewStyle[] = [
     styles.buttonBase,
-    { borderColor: inkColor },
-    isPrimary ? { backgroundColor: inkColor } : styles.subtleBackground,
+    isPrimary ? { backgroundColor: inkColor, borderColor: 'transparent' } : { borderColor: inkColor },
     isRegular ? styles.regularPadding : styles.compactPadding,
   ].filter(Boolean) as ViewStyle[];
 
