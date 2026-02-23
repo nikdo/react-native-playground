@@ -20,12 +20,12 @@ const opacity = {
   pressedSubtleOverlay: 0.08,
 };
 
-type ButtonType = "primary" | "subtle";
+type ButtonVariant = "filled" | "outlined";
 type ButtonSize = "regular" | "compact";
 
 type ButtonProps = {
   caption?: string;
-  type?: ButtonType;
+  variant?: ButtonVariant;
   size?: ButtonSize;
   icon?: string;
   onPress?: () => void;
@@ -37,7 +37,7 @@ type ButtonProps = {
 
 export default function Button({
   caption = "Submit",
-  type = "primary",
+  variant = "filled",
   size = "regular",
   icon,
   onPress,
@@ -46,7 +46,7 @@ export default function Button({
   color = BrandColors.black,
   inverted = false,
 }: ButtonProps) {
-  const isPrimary = type === "primary";
+  const isFilled = variant === "filled";
   const isRegular = size === "regular";
   const isDisabled = disabled || loading;
 
@@ -55,7 +55,7 @@ export default function Button({
 
   const buttonStyle: ViewStyle[] = [
     styles.buttonBase,
-    isPrimary
+    isFilled
       ? { backgroundColor: inkColor, borderColor: "transparent" }
       : { borderColor: inkColor },
     isRegular ? styles.regularPadding : styles.compactPadding,
@@ -63,7 +63,7 @@ export default function Button({
 
   const textStyle: TextStyle[] = [
     styles.textBase,
-    isPrimary ? { color: onInkColor } : { color: inkColor },
+    isFilled ? { color: onInkColor } : { color: inkColor },
     isRegular ? styles.regularText : styles.compactText,
   ];
 
@@ -71,7 +71,7 @@ export default function Button({
     <Pressable
       style={({ pressed }) => [
         ...buttonStyle,
-        pressed && !isDisabled && isPrimary && { opacity: opacity.pressed },
+        pressed && !isDisabled && isFilled && { opacity: opacity.pressed },
         isDisabled && { opacity: opacity.disabled },
       ]}
       onPress={onPress}
@@ -79,7 +79,7 @@ export default function Button({
     >
       {({ pressed }) => (
         <>
-          {pressed && !isDisabled && !isPrimary && (
+          {pressed && !isDisabled && !isFilled && (
             <View
               style={[
                 StyleSheet.absoluteFill,
@@ -91,13 +91,13 @@ export default function Button({
             />
           )}
           {loading && (
-            <ShimmerOverlay color={isPrimary ? onInkColor : inkColor} />
+            <ShimmerOverlay color={isFilled ? onInkColor : inkColor} />
           )}
           {icon && (
             <MaterialIcon
               name={icon}
               size={isRegular ? 24 : 20}
-              color={isPrimary ? onInkColor : inkColor}
+              color={isFilled ? onInkColor : inkColor}
             />
           )}
           <Text style={textStyle}>{caption}</Text>
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     gap: base,
     overflow: "hidden",
   },
-  subtleBackground: {
+  outlinedBackground: {
     backgroundColor: "transparent",
   },
   regularPadding: {

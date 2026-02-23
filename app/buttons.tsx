@@ -18,12 +18,12 @@ export default function ButtonsScreen() {
   return (
     <View style={[styles.container, { backgroundColor }]}>
       <View style={styles.content}>
-        {/* Row 1: Primary Regular */}
+        {/* Row 1: Filled Regular */}
         <View style={styles.row}>
           <View style={styles.leftCol}>
             <Button
               caption="Submit"
-              type="primary"
+              variant="filled"
               size="regular"
               color={buttonColor}
               inverted={inverted}
@@ -33,7 +33,7 @@ export default function ButtonsScreen() {
           </View>
           <Button
             caption="Confirm"
-            type="primary"
+            variant="filled"
             size="regular"
             color={buttonColor}
             inverted={inverted}
@@ -43,12 +43,12 @@ export default function ButtonsScreen() {
           />
         </View>
 
-        {/* Row 2: Subtle Regular */}
+        {/* Row 2: Outlined Regular */}
         <View style={styles.row}>
           <View style={styles.leftCol}>
             <Button
               caption="Reset all"
-              type="subtle"
+              variant="outlined"
               size="regular"
               color={buttonColor}
               inverted={inverted}
@@ -58,7 +58,7 @@ export default function ButtonsScreen() {
           </View>
           <Button
             caption="Reject"
-            type="subtle"
+            variant="outlined"
             size="regular"
             color={buttonColor}
             inverted={inverted}
@@ -68,12 +68,12 @@ export default function ButtonsScreen() {
           />
         </View>
 
-        {/* Row 3: Primary Compact */}
+        {/* Row 3: Filled Compact */}
         <View style={styles.row}>
           <View style={styles.leftCol}>
             <Button
               caption="Invite friends"
-              type="primary"
+              variant="filled"
               size="compact"
               color={buttonColor}
               inverted={inverted}
@@ -83,7 +83,7 @@ export default function ButtonsScreen() {
           </View>
           <Button
             caption="Share"
-            type="primary"
+            variant="filled"
             size="compact"
             color={buttonColor}
             inverted={inverted}
@@ -93,12 +93,12 @@ export default function ButtonsScreen() {
           />
         </View>
 
-        {/* Row 4: Subtle Compact */}
+        {/* Row 4: Outlined Compact */}
         <View style={styles.row}>
           <View style={styles.leftCol}>
             <Button
               caption="Show more"
-              type="subtle"
+              variant="outlined"
               size="compact"
               color={buttonColor}
               inverted={inverted}
@@ -108,7 +108,7 @@ export default function ButtonsScreen() {
           </View>
           <Button
             caption="Save"
-            type="subtle"
+            variant="outlined"
             size="compact"
             color={buttonColor}
             inverted={inverted}
@@ -121,7 +121,7 @@ export default function ButtonsScreen() {
         {/* Full-width button */}
         <Button
           caption="Select membership"
-          type="primary"
+          variant="filled"
           color={buttonColor}
           inverted={inverted}
           disabled={isDisabled}
