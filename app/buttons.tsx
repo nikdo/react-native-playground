@@ -108,6 +108,15 @@ export default function ButtonsScreen() {
             icon="bookmark"
           />
         </View>
+
+        {/* Full-width button */}
+        <Button
+          caption="Select membership"
+          type="primary"
+          color={buttonColor}
+          inverted={inverted}
+          disabled={isDisabled}
+        />
       </View>
 
       {showOverlay && (
@@ -157,7 +166,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   content: {
-    paddingLeft: 24,
+    paddingHorizontal: 24,
     paddingTop: 48,
     gap: 24,
   },
