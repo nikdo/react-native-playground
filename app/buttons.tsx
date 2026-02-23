@@ -132,6 +132,30 @@ export default function ButtonsScreen() {
           disabled={isDisabled}
           loading={isLoading}
         />
+
+        {/* Long text: wraps to two lines then ellipsis */}
+        <View style={styles.row}>
+          <View style={styles.leftCol}>
+            <Button
+              caption="This is a very long button label"
+              variant="filled"
+              size="regular"
+              color={buttonColor}
+              inverted={inverted}
+              disabled={isDisabled}
+              loading={isLoading}
+            />
+          </View>
+          <Button
+            caption="An extremely long label that should be truncated with ellipsis"
+            variant="outlined"
+            size="regular"
+            color={buttonColor}
+            inverted={inverted}
+            disabled={isDisabled}
+            loading={isLoading}
+          />
+        </View>
       </View>
 
       {showOverlay && (
