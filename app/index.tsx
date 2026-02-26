@@ -34,6 +34,13 @@ const EXPERIMENTS = [
     icon: 'app.badge.fill' as const,
     route: '/badges' as const,
   },
+  {
+    id: 'icons',
+    name: 'Denizen Icons',
+    description: 'All IcoMoon icons from selection.json.',
+    icon: 'star.fill' as const,
+    route: '/icons' as const,
+  },
 ];
 
 export default function HomeScreen() {
