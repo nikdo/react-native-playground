@@ -16,6 +16,8 @@ export default function RootLayout() {
   const [loaded, error] = useFonts({
     SaansMedium: require('../assets/fonts/SaansMedium.ttf'),
     SaansBold: require('../assets/fonts/SaansBold.ttf'),
+    'Saans-Regular': require('../assets/fonts/SaansMedium.ttf'),
+    'Saans-Bold': require('../assets/fonts/SaansBold.ttf'),
     'BagossCondensed-Bold': require('../assets/fonts/BagossCondensed-Bold.ttf'),
     'MaterialSymbolsRounded-Filled': require('../assets/fonts/MaterialSymbolsRounded-Filled.ttf'),
     'denizen-icons': require('../assets/fonts/denizen-icons.ttf'),
@@ -49,6 +51,7 @@ export default function RootLayout() {
           <Stack.Screen name="negative-margin" options={{ title: 'Negative Margin' }} />
           <Stack.Screen name="badges" options={{ title: 'Badges' }} />
           <Stack.Screen name="icons" options={{ title: 'Denizen Icons' }} />
+          <Stack.Screen name="denizen-buttons" options={{ title: 'Denizen Buttons' }} />
         </Stack>
         <StatusBar style="auto" />
       </ThemeProvider>

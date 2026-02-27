@@ -100,7 +100,9 @@ export default function Button({
               color={isFilled ? onInkColor : inkColor}
             />
           )}
-          <Text style={textStyle} numberOfLines={2} ellipsizeMode="tail">{caption}</Text>
+          <Text style={textStyle} numberOfLines={2} ellipsizeMode="tail">
+            {caption}
+          </Text>
         </>
       )}
     </Pressable>
@@ -132,8 +134,7 @@ const styles = StyleSheet.create({
     borderRadius: 2 * base,
   },
   textBase: {
-    fontFamily: CustomFonts.bold,
-    fontWeight: "bold",
+    fontFamily: CustomFonts.bold, // No fontWeight here — Android can't resolve bold variant of an already-bold custom font
     textAlign: "center",
   },
   regularText: {

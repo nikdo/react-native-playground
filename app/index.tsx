@@ -41,6 +41,13 @@ const EXPERIMENTS = [
     icon: 'star.fill' as const,
     route: '/icons' as const,
   },
+  {
+    id: 'denizen-buttons',
+    name: 'Denizen Buttons',
+    description: 'Real denizen-app Button via Metro aliasing.',
+    icon: 'rectangle.fill' as const,
+    route: '/denizen-buttons' as const,
+  },
 ];
 
 export default function HomeScreen() {
