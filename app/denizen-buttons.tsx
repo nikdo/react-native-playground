@@ -10,10 +10,21 @@ import {
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import { Button as DenizenButton } from "@ui-library/core/Button";
-import type { ButtonColor } from "@ui-library/core/Button/styles";
+// TODO: Re-enable when denizen-app internal imports are fixed
+// import { Button as DenizenButton } from "@ui-library/core/Button";
+// import type { ButtonColor } from "@ui-library/core/Button/styles";
+type ButtonColor = string;
 import PlaygroundButton from "@/components/button";
 import { BrandColors, CustomFonts } from "@/constants/theme";
+
+// Placeholder while denizen-app Button import is broken
+function DenizenButton({ children, ...props }: { children: React.ReactNode; [key: string]: any }) {
+  return (
+    <View style={{ padding: 12, borderWidth: 1, borderColor: '#ccc', borderRadius: 8, opacity: 0.4 }}>
+      <Text style={{ fontFamily: CustomFonts.default, color: '#999' }}>{children}</Text>
+    </View>
+  );
+}
 
 const COLOR_OPTIONS: {
   label: string;
