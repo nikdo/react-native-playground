@@ -54,6 +54,7 @@ export default function RootLayout() {
           <Stack.Screen name="denizen-buttons" options={{ title: 'Denizen Buttons' }} />
           <Stack.Screen name="notifications" options={{ title: 'Push Notifications' }} />
           <Stack.Screen name="color-game" options={{ title: 'Color Game', headerShown: false }} />
+          <Stack.Screen name="range-slider" options={{ title: 'Range Slider' }} />
         </Stack>
         <StatusBar style="auto" />
       </ThemeProvider>

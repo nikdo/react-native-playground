@@ -62,6 +62,13 @@ const EXPERIMENTS = [
     icon: 'circle.fill' as const,
     route: '/color-game' as const,
   },
+  {
+    id: 'range-slider',
+    name: 'Range Slider',
+    description: 'Draggable range slider inside a scrollable view.',
+    icon: 'slider.horizontal.3' as const,
+    route: '/range-slider' as const,
+  },
 ];
 
 export default function HomeScreen() {
