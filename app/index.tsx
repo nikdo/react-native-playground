@@ -48,6 +48,13 @@ const EXPERIMENTS = [
     icon: 'rectangle.fill' as const,
     route: '/denizen-buttons' as const,
   },
+  {
+    id: 'notifications',
+    name: 'Push Notifications',
+    description: 'Configure and trigger iOS local notifications.',
+    icon: 'bell.fill' as const,
+    route: '/notifications' as const,
+  },
 ];
 
 export default function HomeScreen() {

@@ -52,6 +52,7 @@ export default function RootLayout() {
           <Stack.Screen name="badges" options={{ title: 'Badges' }} />
           <Stack.Screen name="icons" options={{ title: 'Denizen Icons' }} />
           <Stack.Screen name="denizen-buttons" options={{ title: 'Denizen Buttons' }} />
+          <Stack.Screen name="notifications" options={{ title: 'Push Notifications' }} />
         </Stack>
         <StatusBar style="auto" />
       </ThemeProvider>
