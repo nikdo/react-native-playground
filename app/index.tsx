@@ -55,6 +55,13 @@ const EXPERIMENTS = [
     icon: 'bell.fill' as const,
     route: '/notifications' as const,
   },
+  {
+    id: 'color-game',
+    name: 'Color Game',
+    description: 'Landscape game POC with color-changing circle.',
+    icon: 'circle.fill' as const,
+    route: '/color-game' as const,
+  },
 ];
 
 export default function HomeScreen() {
