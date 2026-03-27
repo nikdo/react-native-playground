@@ -69,6 +69,13 @@ const EXPERIMENTS = [
     icon: 'slider.horizontal.3' as const,
     route: '/range-slider' as const,
   },
+  {
+    id: 'country-flags',
+    name: 'Country Flags',
+    description: 'Flag icons in circle and 2:3 variants.',
+    icon: 'flag.fill' as const,
+    route: '/country-flags' as const,
+  },
 ];
 
 export default function HomeScreen() {
